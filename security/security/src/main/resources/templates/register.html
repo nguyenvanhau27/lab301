@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+</head>
+<body>
+<h1>Register</h1>
+
+<!-- Error message if registration failed -->
+<div th:if="${error}">
+    <p style="color: red;" th:text="${error}"></p>
+</div>
+
+<!-- Registration Form -->
+<form action="/auth/register" method="post" th:object="${user}">
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required/>
+
+    <label>Password:</label>
+    <input type="password" th:field="*{password}" required/>
+
+    <button type="submit">Register</button>
+</form>
+
+<!-- Success message if registration is successful -->
+<div th:if="${message}">
+    <p style="color: green;" th:text="${message}"></p>
+</div>
+</body>
+</html>
