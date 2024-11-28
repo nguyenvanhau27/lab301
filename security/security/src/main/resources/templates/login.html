@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Login</title>
 </head>
 <body>
 <h1>Login</h1>
 
-<!-- Error message if login failed -->
-<div th:if="${error}">
-    <p style="color: red;" th:text="${error}"></p>
-</div>
-
-<!-- Login Form -->
-<form action="/auth/login" method="post" th:object="${loginRequest}">
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" required/>
-
-    <label>Password:</label>
-    <input type="password" th:field="*{password}" required/>
-
-    <button type="submit">Login</button>
+<form th:action="@{/login}" th:object="${loginRequest}" method="post">
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" th:field="*{email}" />
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid email</p>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" th:field="*{password}" />
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid password</p>
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
 </form>
 
-<!-- Success message if login is successful -->
-<div th:if="${message}">
-    <p style="color: green;" th:text="${message}"></p>
-</div>
+<p th:if="${error}" th:text="${error}"></p>
 </body>
 </html>

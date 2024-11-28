@@ -36,8 +36,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/images/**").permitAll()
-                        .requestMatchers("/index.html").permitAll()
+                        .requestMatchers("/home.jsp").permitAll()
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/public/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                         .requestMatchers("/auth/change-password").authenticated()
 
