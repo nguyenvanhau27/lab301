@@ -17,8 +17,14 @@ public class PublicController {
 
     @GetMapping("/users")
     public String listUsers(Model model) {
+        System.out.println("listUsers() called"); // Log để kiểm tra
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "dashboard"; // JSP file name
+        return "dashboard";
+    }
+    @GetMapping("/test")
+    public String test() {
+        System.out.println("PublicController: test() called");
+        return "test";
     }
 }

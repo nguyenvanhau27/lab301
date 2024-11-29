@@ -27,6 +27,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String username = null;
         String jwtToken = null;
+
+        String uri = request.getRequestURI();
+        if (uri.startsWith("/public/") || uri.startsWith("/images/")) {
+            filterChain.doFilter(request, response); // Bỏ qua các request public
+            return;
+        }
+
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwtToken = authorizationHeader.substring(7);
             username = jwtService.extracUsername(jwtToken);
